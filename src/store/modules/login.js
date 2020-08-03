@@ -8,7 +8,14 @@ const getters = {
     }
 }
 
+const mutations = {
+    setLoginCheck(state) {
+        state.loginCheck = !state.loginCheck;
+    }
+}
+
 export default {
     state,
-    getters
+    getters,
+    mutations
 }

@@ -18,7 +18,8 @@
                         <div class="nav-box">
                             <ul class="thumb-nav-items">
                                 <li v-for="item in getTodayItems" :key="item.index" 
-                                    @mouseover="setSelectedIndex(item.index)" 
+                                    @mouseover="setSelectedIndex(item.index)"
+                                    @click="hrefToon(item.url)"
                                     class="thumb-nav-item"
                                     :class="{'selected-item': item.index == getSelectedIndex}"
                                     :style="{'transform': 'translateY('+computedItemY+')'}"
@@ -93,6 +94,9 @@ export default {
                 this.itemY -= 51.3;
             }
             this.nextIndex();
+        },
+        hrefToon(url) {
+            window.open(url);
         }
     }
 }

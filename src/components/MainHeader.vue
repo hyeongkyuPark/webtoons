@@ -1,13 +1,13 @@
 <template>
   <div class="main-header">
       <div class="main-header-wrap">
-      <div class="title-box">
+      <div @click="goHome" class="title-box">
           <div class="main-logo"></div>
           <h2 class="main-title">웹툰 모아보기</h2>
       </div>
       <div class="login-box" v-if="!this.getLoginCheck">
-          <a href="#">로그인</a>
-          <a href="#">회원가입</a>
+          <a href="/login">로그인</a>
+          <a href="/join">회원가입</a>
       </div>
       <div class="login-box" v-else>
           <a href="#">마이페이지</a>
@@ -25,6 +25,11 @@ export default {
         ...mapGetters([
             'getLoginCheck'
         ])
+    },
+    methods: {
+        goHome() {
+            document.location.href = '/';
+        }
     }
 }
 </script>
@@ -42,6 +47,7 @@ export default {
         align-items: center;
     }
     .title-box {
+        cursor: pointer;
         display: flex;
         align-items: center;
     }

@@ -15,8 +15,12 @@
     "cheerio": "^1.0.0-rc.3",
     "core-js": "^3.6.5",
     "moment": "^2.27.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^9.0.2",
+    "sweetalert2": "^9.17.0",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4",
+    "vue-sweetalert2": "^3.0.6",
     "vuex": "^3.5.1"
   },
   "devDependencies": {

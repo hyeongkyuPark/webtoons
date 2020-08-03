@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import {store} from './store/store'
 import VueRouter from 'vue-router';
+import VueSweetalert2 from 'vue-sweetalert2';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -11,11 +12,13 @@ library.add(fas)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
+Vue.use(VueSweetalert2);
+
 Vue.config.productionTip = false
 
 Vue.use(VueRouter);
 
-import {MainPage, LoginPage} from './pages'
+import {MainPage, LoginPage, JoinPage} from './pages'
 
 const routes = [
   {
@@ -25,6 +28,10 @@ const routes = [
   {
     path: '/',
     component: MainPage
+  },
+  {
+    path: '/join',
+    component: JoinPage
   }
 ];
 

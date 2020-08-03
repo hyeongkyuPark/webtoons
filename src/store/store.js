@@ -6,6 +6,7 @@ import nav from './modules/nav'
 import todayToon from './modules/todayToon'
 import daumBest from './modules/daumBest'
 import naverBest from './modules/naverBest'
+import searchAll from './modules/searchAll'
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export const store = new Vuex.Store({
         nav,
         todayToon,
         daumBest,
-        naverBest
+        naverBest,
+        searchAll
     }
 });

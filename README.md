@@ -5,6 +5,11 @@
 
 여러 사이트 웹툰을 모아서 관리하고 등록된 웹툰들 중에서 아직 보지 않은 웹툰들을 알려줍니다.
 
+## 서버 github
+
+webtoons-API : https://github.com/hyeongkyuPark/webtoons-API
+
+webtoons-DB : https://github.com/hyeongkyuPark/webtoons-DB
 
 ## 구현
 

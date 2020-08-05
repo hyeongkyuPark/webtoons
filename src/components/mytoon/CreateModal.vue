@@ -128,7 +128,7 @@
                     </div>
                     <div class="btn-box">
                         <button @click="goCollect">뒤로</button>
-                        <button @click="postToon">등록</button>
+                        <button @click="post">등록</button>
                     </div>
                 </div>
               </div>
@@ -233,6 +233,17 @@ export default {
         },
         goCollect() {
             this.setMySub('collecter');
+        },
+        post() {
+            this.postToon();
+            this.$swal.fire({
+                title: 'Success!',
+                text: '웹툰 등록을 완료하였습니다.',
+                icon: 'success',
+                confirmButtonText: '홈',
+            }).then(() => {
+                  document.location = '/';
+            });
         }
     }
 }

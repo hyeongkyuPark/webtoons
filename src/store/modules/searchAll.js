@@ -251,10 +251,9 @@ const mutations = {
 
     },
     postToon(state) {
-        axios.post('http://localhost:3030/mytoon', state.createList)
-      .then((res) => {
-        console.log('post :', res.data);
-      });
+        let userId = document.cookie.match(/[userID]=([a-z A-Z 0-9]*)/)[1];
+
+        axios.post('http://localhost:3030/mytoon', {list: state.createList, id: userId});
     }
 };
 

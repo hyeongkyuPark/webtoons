@@ -7,6 +7,8 @@ import todayToon from './modules/todayToon'
 import daumBest from './modules/daumBest'
 import naverBest from './modules/naverBest'
 import searchAll from './modules/searchAll'
+import weekList from './modules/weekList'
+import detailModal from './modules/detailModal'
 
 Vue.use(Vuex);
 
@@ -18,6 +20,8 @@ export const store = new Vuex.Store({
         todayToon,
         daumBest,
         naverBest,
-        searchAll
+        searchAll,
+        weekList,
+        detailModal
     }
 });

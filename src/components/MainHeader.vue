@@ -5,29 +5,35 @@
           <div class="main-logo"></div>
           <h2 class="main-title">웹툰 모아보기</h2>
       </div>
-      <div class="login-box" v-if="!this.getLoginCheck">
+      <div class="login-box" v-if="!getLoginCheck()">
           <a href="/login">로그인</a>
           <a href="/join">회원가입</a>
       </div>
       <div class="login-box" v-else>
           <a href="#">마이페이지</a>
-          <a href="#">로그아웃</a>
+          <a href="#" @click="logOut">로그아웃</a>
       </div>
       </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-
 export default {
-    computed: {
-        ...mapGetters([
-            'getLoginCheck'
-        ])
-    },
     methods: {
+        getLoginCheck() {
+            let cookie = document.cookie.match(/[userID]=([a-z A-Z 0-9]*)/);
+
+            if(cookie) {
+                return true;
+            } else {
+                return false;
+            }
+        },
         goHome() {
+            document.location.href = '/';
+        },
+        logOut() {
+            document.cookie =  'userID =; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             document.location.href = '/';
         }
     }

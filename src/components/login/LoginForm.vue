@@ -9,7 +9,7 @@
                     그럴때 필요한 사이트가 바로 웹툰 모아보기 입니다. 다양한 사이트의 웹툰을 한번에 관리 할 수 있게 개발중입니다.
                     가입을 원하신다면 아래 회원가입 버튼을 눌러주세요.
                 </p>
-                <button>회원가입</button>
+                <button @click="goJoin">회원가입</button>
             </div>
         </div>
         <div class="login-box">
@@ -66,6 +66,9 @@ export default {
         ...mapMutations([
             'setLoginCheck'
         ]),
+        goJoin() {
+            document.location ='/join';
+        },
         setFocusId() {
             this.focusId=true;
         },
@@ -83,7 +86,6 @@ export default {
         loginCheck() {
             axios.post('http://localhost:3030/user/login', this.user)
             .then((res) => {
-                console.log(res.data);
                 if (res.data == 'no match pw' || res.data == false) {
                     this.$swal.fire({
                         title: 'Error!',
@@ -99,7 +101,8 @@ export default {
                         }
                     });
                 } else {
-                    this.setLoginCheck();
+                    document.cookie = 'userID' + '=' + res.data + ';path=/';
+                    document.location = '/';
                 }
             });
         }

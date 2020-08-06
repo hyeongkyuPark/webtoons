@@ -64,6 +64,14 @@ const getters = {
 
 
         return arr;
+    },
+    getNewToon(state) {
+        let temp = state.allToon.slice(0,state.allToon.length);
+        let newToon = temp.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+
+        return newToon.slice(0,3);
     }
 };
 

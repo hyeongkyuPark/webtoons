@@ -39,7 +39,7 @@
                                 <img class="img" :src="item.thumb">
                             </div>
                             <p class="title">{{item.title}}</p>
-                            <p class="date">등록일</p>
+                            <p class="date">{{item.date}}</p>
                         </li>
 
                       </ul>
@@ -127,6 +127,7 @@ export default {
         height: 100vh;
         background: rgba(71, 71, 71, 0.548);
         overflow: hidden;
+        z-index: 10;
     }
 
     .detail-modal-inner {

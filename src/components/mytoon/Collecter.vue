@@ -5,14 +5,12 @@
         <div class="new-mytoon">
           <h2>신규 등록 웹툰</h2>
           <ul class="new-items">
-            <li class="new-item">
-
-            </li>
-            <li class="new-item">
-
-            </li>
-            <li class="new-item">
-
+            <li v-for="(item, idx) in getNewToon" :key="idx" class="new-item">
+              <div class="text-hover">
+                <h2>{{item.mytoonTitle}}</h2>
+                <p class="description">{{item.mytoonDescription}}</p>
+              </div>
+              <img :src="item.mytoonThumb" class="new-thumb">
             </li>
           </ul>
         </div>
@@ -76,7 +74,8 @@ export default {
       'getFridayToon',
       'getSatdayToon',
       'getSundayToon',
-      'getContentVisible'
+      'getContentVisible',
+      'getNewToon'
     ]),
     getSelectNav() {
       return this.selectNav;
@@ -170,10 +169,48 @@ export default {
 
   .new-items > .new-item {
     width: 300px;
-    height: 220px;
-    border: 1px solid;
+    height: 200px;
     padding: 10px;
     box-sizing: border-box;
+    position: relative;
+  }
+
+  .text-hover {
+    transition: .5s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    color: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
+  }
+
+  .new-items > .new-item:hover .text-hover {
+    color: white;
+    background: rgba(0, 0, 0, 0.637);
+  }
+
+  
+
+  .text-hover > h2 {
+    font-size: 25px;
+    padding: 10px;
+  }
+
+  .text-hover > p {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.4em;
+  }
+
+  .new-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .mytoon-list {

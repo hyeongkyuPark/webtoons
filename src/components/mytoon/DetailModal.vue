@@ -1,5 +1,6 @@
 <template>
   <div class="detail-modal">
+      <Bookmark v-if="getBookmarkModal"/>
       <div class="close-btn">
           <font-awesome-icon icon="times-circle" @click="close()"/>
       </div>
@@ -46,6 +47,7 @@
                   </div>
               </div>
               <div class="content-footer">
+                  <button @click="openBookmark" class="updateBookmarkBtn">북마크 수정</button>
                   <div class="page-nav">
                     <div @click="prevPagging" class="page-left">
                         <font-awesome-icon icon="caret-square-left"/>
@@ -60,19 +62,25 @@
               </div>
           </div>
       </div>
+
   </div>
 </template>
 
 <script>
+import Bookmark from './Bookmark';
 import {mapMutations, mapGetters, mapActions} from 'vuex';
 export default {
+    components:{
+        Bookmark
+    },
     computed: {
         ...mapGetters([
             'getMarkContent',
             'getAllPage',
             'getPagging',
             'getContentDetail',
-            'getPage'
+            'getPage',
+            'getBookmarkModal'
         ])
     },
     methods: {
@@ -81,7 +89,8 @@ export default {
             'nextPagging',
             'setPage',
             'setAllToon',
-            'closeModal'
+            'closeModal',
+            'bookmarkModalOpen'
         ]),
         ...mapActions([
             'updateBookmark',
@@ -96,6 +105,9 @@ export default {
             this.setAllToon(cookie);
             this.updateContent(this.getContentDetail);
             window.open(payload.url);
+        },
+        openBookmark() {
+            this.bookmarkModalOpen();
         }
     }
 }
@@ -238,6 +250,7 @@ export default {
         display: flex;
         justify-content: center;
         margin-top: 40px;
+        position: relative;
     }
 
 
@@ -300,5 +313,18 @@ export default {
         color: white;
         font-weight: bold;
         border-radius: 50px;
+    }
+
+    .updateBookmarkBtn {
+        cursor: pointer;
+        position: absolute;
+        height: 30px;
+        background: rgb(0, 132, 255);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-weight: bold;
+        right: 10px;
+        outline: none;
     }
 </style>

@@ -4,13 +4,18 @@ const state = {
     contentUrl: '',
     contentDetail: {},
     allContent: [],
+    markContent: [],
     page: 1,
     pagging: 1,
     bookmark: 1,
-    contentVisible: false
+    contentVisible: false,
+    bookmarkModal: false
 }
 
 const getters = {
+    getBookmarkModal(state) {
+        return state.bookmarkModal;
+    },
     getPage(state) {
         return state.page;
     },
@@ -25,7 +30,7 @@ const getters = {
     },
     getMarkContent(state) {
         
-        let markContent = state.allContent.filter(item => {
+        let markContent = state.markContent.filter(item => {
             return parseInt(item.num) >= state.bookmark;
         });
 
@@ -41,14 +46,14 @@ const getters = {
 
         let result = [];
 
-        for(let i = 1; i <= Math.ceil(state.allContent.length/10); i++) {
+        for(let i = 1; i <= Math.ceil(state.markContent.length/10); i++) {
             result.push(i);
         }
 
         return result;
     },
     getPagging(state) {
-        let totalPage = Math.ceil(state.allContent.length/10);
+        let totalPage = Math.ceil(state.markContent.length/10);
 
         let start = (state.pagging-1)*10+1
 
@@ -64,10 +69,19 @@ const getters = {
 
         return resultArr;
 
+    },
+    getBookmark(state) {
+        return state.bookmark;
     }
 }
 
 const mutations = {
+    bookmarkModalOpen(state) {
+        state.bookmarkModal = true;
+    },
+    bookmarkModalClose(state) {
+        state.bookmarkModal = false;
+    },
     setContentDetail(state, content) {
         state.contentDetail = content;
     },
@@ -78,7 +92,8 @@ const mutations = {
         state.bookmark = bookmark;
     },
     setAllContent(state, allContent) {
-        state.allContent = allContent.data.filter(item => {
+        state.allContent = allContent.data;
+        state.markContent = state.allContent.filter(item => {
             return parseInt(item.num) >= state.bookmark;
         });
     },
@@ -99,7 +114,7 @@ const mutations = {
         }
     },
     nextPagging(state) {
-        if(state.pagging < Math.ceil(state.allContent.length/10/10)) {
+        if(state.pagging < Math.ceil(state.markContent.length/10/10)) {
             state.pagging += 1;
             state.page = (state.pagging*10) - 9;
         }

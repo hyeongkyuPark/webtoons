@@ -6,7 +6,7 @@ const state = {
     allContent: [],
     page: 1,
     pagging: 1,
-    bookmark: 0,
+    bookmark: 1,
     contentVisible: false
 }
 
@@ -78,13 +78,15 @@ const mutations = {
         state.bookmark = bookmark;
     },
     setAllContent(state, allContent) {
-        console.log(allContent.data);
         state.allContent = allContent.data.filter(item => {
             return parseInt(item.num) >= state.bookmark;
         });
     },
-    changeContentVisible(state) {
-        state.contentVisible = !state.contentVisible;
+    openModal(state) {
+        state.contentVisible = true;
+    },
+    closeModal(state) {
+        state.contentVisible = false;
     },
     resetPagging(state) {
         state.page = 1;
@@ -114,7 +116,21 @@ const actions = {
         commit('setContentDetail', content);
         commit('resetPagging');
         commit('setAllContent', await axios.get('http://localhost:3000/search/detail?url=' + state.contentUrl));
-        commit('changeContentVisible');
+        commit('openModal');
+    },
+    async updateContent({commit, state}, content) {
+        console.log(state.bookmark);
+        commit('setContentDetail', content);
+        commit('setAllContent', {data: state.allContent});
+        console.log('end');
+    },
+    async updateBookmark({commit}, {num, no}) {
+        let newBookmark = num;
+
+        commit('setBookmark', newBookmark);
+
+        await axios.post('http://localhost:3030/mytoon/bookmark', {newBookmark, no});
+
     }
 }
 

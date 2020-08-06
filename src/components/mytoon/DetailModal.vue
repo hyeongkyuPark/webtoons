@@ -1,7 +1,7 @@
 <template>
   <div class="detail-modal">
       <div class="close-btn">
-          <font-awesome-icon icon="times-circle" @click="closeModal()"/>
+          <font-awesome-icon icon="times-circle" @click="close()"/>
       </div>
       <div class="detail-modal-inner">
           <div class="content">
@@ -33,7 +33,7 @@
                   </div>
                   <div class="content-box">
                       <ul class="content-items">
-                          <li @click="goToon(item.url)" class="content-item" v-for="(item, idx) in getMarkContent" :key="idx">
+                          <li @click="goToon({url:item.url, num:item.num, no:getContentDetail.mytoonNo})" class="content-item" v-for="(item, idx) in getMarkContent" :key="idx">
                             <div class="img-box">
                                 <img class="img" :src="item.thumb">
                             </div>
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import {mapMutations, mapGetters} from 'vuex';
+import {mapMutations, mapGetters, mapActions} from 'vuex';
 export default {
     computed: {
         ...mapGetters([
@@ -77,16 +77,25 @@ export default {
     },
     methods: {
         ...mapMutations([
-            'changeContentVisible',
             'prevPagging',
             'nextPagging',
-            'setPage'
+            'setPage',
+            'setAllToon',
+            'closeModal'
         ]),
-        closeModal() {
-            this.changeContentVisible();
+        ...mapActions([
+            'updateBookmark',
+            'updateContent'
+        ]),
+        close() {
+            this.closeModal();
         },
-        goToon(url) {
-            window.open(url);
+        goToon(payload) {
+            this.updateBookmark({num:parseInt(payload.num)+1, no:payload.no});
+            let cookie = document.cookie.match(/[userID]=([a-z A-Z 0-9]*)/)[1];
+            this.setAllToon(cookie);
+            this.updateContent(this.getContentDetail);
+            window.open(payload.url);
         }
     }
 }

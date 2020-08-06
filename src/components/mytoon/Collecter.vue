@@ -30,7 +30,7 @@
             <li :class="selectNav == 'sun' ? 'selected':''" @click="setWeekday('sun')">일</li>
           </ul>
           <ul class="collect-items">
-            <li class="collect-item" v-for="(item, idx) in getWeekToon()" :key="idx" @click="openModal({bookmark: item.mytoonBookmark+1, url: item.mytoonUrl, content: item})">
+            <li class="collect-item" v-for="(item, idx) in getWeekToon()" :key="idx" @click="openModal({bookmark: item.mytoonBookmark, url: item.mytoonUrl, content: item})">
               <div class="collect-item-wrap">
 
                 <img class="img-box" :src="item.mytoonThumb">
@@ -39,7 +39,7 @@
                   <p class="title">{{item.mytoonTitle}}</p>
                   <p class="writer">{{item.mytoonWriter}}</p>
                   <p class="site">(네이버)</p>
-                  <p class="bookmark">볼 회차 : {{item.mytoonBookmark + 1}}화</p>
+                  <p class="bookmark">볼 회차 : {{item.mytoonBookmark}}화</p>
                 </div>
               </div>
             </li>
